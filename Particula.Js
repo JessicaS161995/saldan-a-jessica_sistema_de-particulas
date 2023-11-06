@@ -1,35 +1,41 @@
-class particula{
-    constructor() { 
-        this.estaMuerta = false;
-        this.tiempodeVida = Math.ceil(random(10, 100));
-        
-        this.pos = createVector(width / 2, height / 2);
+class Particula {
+	constructor() {
+		this.tamanoInicial = random(10, 50);
+		this.tamano = this.tamanoInicial;
+		this.estaMuerta = false;
+		this.tiempoDeVidaInicial = Math.ceil(random(10, 80));
+		this.tiempoDeVida = this.tiempoDeVidaInicial;
 
-        this.vel = createVector(0, random(3,10));
-        this.vel = rotate(random(360));
+		this.pos = createVector(mouseX, mouseY);
 
-        this.g = createVector(0, 0.1);
-    }
-    
-    // Método ==> method update
+		this.vel = createVector(0, random(3, 5));
+		this.vel.rotate(random(360));
 
-    actualizar() {
-        this.vel.add(this.g);
-        this.pos.add(this.vel);
+		this.g = createVector(0, 0.1);
+	}
+	// Método ==> method update
+	actualizar() {
+		this.vel.add(this.g);
+		this.pos.add(this.vel);
 
-        this.tiempodeVida -= 1;
+		this.tamano = map(
+			this.tiempoDeVida,
+			0,
+			this.tiempoDeVidaInicial,
+			0,
+			this.tamanoInicial
+		);
 
-        if (this.tiempodeVida <= 0) {
-            this.estaMuerta = true;
-            print('ups, me morí!');
-        }
+		this.tiempoDeVida -= 1;
 
-    }
-
-    // Método ==> method display
-    
-    mostrar() { 
-        circle(this.pos.x, this.pos.y, 20);
-    } 
-    
+		if (this.tiempoDeVida <= 0) {
+			this.estaMuerta = true;
+			print('ups, me morí!');
+			circle(this.pos.x, this.pos.y, this.tamanoInicial);
+		}
+	}
+	// Método ==> method display
+	mostrar() {
+		circle(this.pos.x, this.pos.y, this.tamano);
+	}
 }
