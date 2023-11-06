@@ -3,15 +3,16 @@ class Particula {
 		this.tamanoInicial = random(10, 50);
 		this.tamano = this.tamanoInicial;
 		this.estaMuerta = false;
-		this.tiempoDeVidaInicial = Math.ceil(random(10, 80));
+		this.tiempoDeVidaInicial = Math.ceil(random(10, 20));
 		this.tiempoDeVida = this.tiempoDeVidaInicial;
 
 		this.pos = createVector(mouseX, mouseY);
 
-		this.vel = createVector(0, random(3, 5));
+		this.vel = createVector(0, random(5, 10));
 		this.vel.rotate(random(360));
 
-		this.g = createVector(0, 0.1);
+        this.g = createVector(0, 0.1);
+        this.color = color(255, 0, random(100, 255), 100);
 	}
 	// Método ==> method update
 	actualizar() {
