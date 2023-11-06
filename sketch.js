@@ -3,10 +3,14 @@ let p;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES);
   p = new Particula();
 }
 
 function draw() {
-  p.actualizar();
-  p.mostrar();
+  if (!p.estaMuerta) {
+    p.actualizar();
+    p.mostrar();
+  }
+
 }
