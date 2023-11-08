@@ -6,7 +6,7 @@ function setup() {
 }
 
 function draw() {
-	background(125, 50, 125);
+	background(0);
 
 	let p = new Particula();
   sistema.push(p);

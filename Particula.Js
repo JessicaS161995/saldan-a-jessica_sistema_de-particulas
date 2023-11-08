@@ -1,23 +1,23 @@
 class Particula {
 	constructor() {
 		this.tamanoInicial = random(10, 50);
-		this.tamano = this.tamanoInicial;
+		this.tamano = random(5, 30);
 		this.estaMuerta = false;
-		this.tiempoDeVidaInicial = Math.ceil(random(10, 20));
+		this.tiempoDeVidaInicial = Math.ceil(random(50, 150));
 		this.tiempoDeVida = this.tiempoDeVidaInicial;
 
 		this.pos = createVector(mouseX, mouseY);
 
-		this.vel = createVector(0, random(5, 10));
-		this.vel.rotate(random(360));
+		// Dirección y velocidad aleatorias
+		this.g = createVector(random(-1, 1), random(0.1, 1.5));
 
-        this.g = createVector(0, 0.1);
-        this.color = color(255, 0, random(100, 255), 100);
+		// Actualiza el color en función de la posición del mouse
+		this.color = color(map(mouseX, 0, width, 0, 255), map(mouseY, 0, height, 0, 255), random(100, 255), 100);
 	}
-	// Método ==> method update
+
+	// Método update
 	actualizar() {
-		this.vel.add(this.g);
-		this.pos.add(this.vel);
+		this.pos.add(this.g);
 
 		this.tamano = map(
 			this.tiempoDeVida,
@@ -31,12 +31,13 @@ class Particula {
 
 		if (this.tiempoDeVida <= 0) {
 			this.estaMuerta = true;
-			print('ups, me morí!');
-			circle(this.pos.x, this.pos.y, this.tamanoInicial);
 		}
 	}
-	// Método ==> method display
+
+	// Método display
 	mostrar() {
+		noStroke();
+		fill(this.color);
 		circle(this.pos.x, this.pos.y, this.tamano);
 	}
 }
